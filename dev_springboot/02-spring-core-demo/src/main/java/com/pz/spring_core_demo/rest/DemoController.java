@@ -9,20 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DemoController {
     private Coach coach;
-    private Coach anotherCoach;
 
     @Autowired
-    public DemoController(@Qualifier("cricketCoach") Coach coach,@Qualifier("cricketCoach") Coach anotherCoach) {
+    public DemoController(@Qualifier("cricketCoach") Coach coach) {
         this.coach = coach;
-        this.anotherCoach = anotherCoach;
         System.out.println(this.getClass().getSimpleName());
-    }
-
-    @GetMapping("/check")
-    private String check(){
-        return "Comparing beans: coach1 == coach2 " + (coach == anotherCoach);
-        //for singleton -> true
-        //for prototype -> false
     }
 
     @GetMapping("/dailyworkout")
