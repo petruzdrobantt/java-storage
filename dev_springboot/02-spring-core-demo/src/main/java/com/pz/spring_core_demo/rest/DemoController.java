@@ -9,20 +9,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DemoController {
     private Coach coach;
+    private Coach anotherCoach;
 
-    @Autowired //- constructor injection
-    public DemoController(@Qualifier("cricketCoach") Coach coach) {
+    @Autowired
+    public DemoController(@Qualifier("cricketCoach") Coach coach,@Qualifier("cricketCoach") Coach anotherCoach) {
         this.coach = coach;
+        this.anotherCoach = anotherCoach;
         System.out.println(this.getClass().getSimpleName());
     }
-    
+
+    @GetMapping("/check")
+    private String check(){
+        return "Comparing beans: coach1 == coach2 " + (coach == anotherCoach);
+        //for singleton -> true
+        //for prototype -> false
+    }
+
     @GetMapping("/dailyworkout")
     public String getDailyWorkout(){
         return coach.getDailyWorkout();
     }
 }
-    //setter injection -> with decorator autowired you can use any method name, not necessarily setCoach
-//    @Autowired
-//    public void anyName(Coach coach){
-//        this.coach = coach;
-//    }
