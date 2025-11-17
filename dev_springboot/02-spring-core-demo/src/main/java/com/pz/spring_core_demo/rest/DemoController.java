@@ -11,7 +11,7 @@ public class DemoController {
     private Coach coach;
 
     @Autowired
-    public DemoController(@Qualifier("cricketCoach") Coach coach) {
+    public DemoController(@Qualifier("aquatic") Coach coach) {
         this.coach = coach;
         System.out.println(this.getClass().getSimpleName());
     }
