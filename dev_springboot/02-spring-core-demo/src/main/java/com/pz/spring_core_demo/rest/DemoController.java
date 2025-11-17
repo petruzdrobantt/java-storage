@@ -13,6 +13,7 @@ public class DemoController {
     @Autowired //- constructor injection
     public DemoController(@Qualifier("cricketCoach") Coach coach) {
         this.coach = coach;
+        System.out.println(this.getClass().getSimpleName());
     }
     
     @GetMapping("/dailyworkout")
