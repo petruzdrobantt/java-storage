@@ -14,15 +14,14 @@ public class DemoController {
     public DemoController(@Qualifier("cricketCoach") Coach coach) {
         this.coach = coach;
     }
-
-    //setter injection -> with decorator autowired you can use any method name, not necessarily setCoach
-//    @Autowired
-//    public void anyName(Coach coach){
-//        this.coach = coach;
-//    }
-
+    
     @GetMapping("/dailyworkout")
     public String getDailyWorkout(){
         return coach.getDailyWorkout();
     }
 }
+    //setter injection -> with decorator autowired you can use any method name, not necessarily setCoach
+//    @Autowired
+//    public void anyName(Coach coach){
+//        this.coach = coach;
+//    }
