@@ -20,11 +20,37 @@ public class Application {
     public CommandLineRunner commandLineRunner(StudentDAO studentDAO){
         return runner -> {
 //            createStudent(studentDAO);
-//            createMultipleStudents(studentDAO);
+            createMultipleStudents(studentDAO);
 //                readStudent(studentDAO);
 //            queryForStudents(studentDAO);
-            queryForStudentsByLastName(studentDAO);
+//            queryForStudentsByLastName(studentDAO);
+//            updateStudent(studentDAO);
+//            deleteStudent(studentDAO);
+//            deleteAllStudents(studentDAO);
         };
+    }
+
+    private void deleteAllStudents(StudentDAO studentDAO) {
+        System.out.printf("Deleted %d rows", studentDAO.deleteAll());
+    }
+
+    private void deleteStudent(StudentDAO studentDAO) {
+        int studentId = 3;
+        System.out.println("Deleting student with id: "+studentId);
+        studentDAO.delete(studentId);
+    }
+
+    private void updateStudent(StudentDAO studentDAO) {
+        int studentId = 2;
+
+        System.out.println("Getting student with id: "+studentId);
+        Student newStudent = studentDAO.findById(studentId);
+
+        System.out.println("Saving changes");
+        newStudent.setFirstName("Boss");
+
+        studentDAO.update(newStudent);
+        System.out.println("Modified student: "+newStudent);
     }
 
     private void queryForStudentsByLastName(StudentDAO studentDAO) {

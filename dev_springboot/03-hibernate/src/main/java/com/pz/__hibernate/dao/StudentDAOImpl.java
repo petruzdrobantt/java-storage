@@ -18,13 +18,13 @@ public class StudentDAOImpl implements StudentDAO{
         this.entityManager = entityManager;
     }
 
-    @Transactional
     @Override
+    @Transactional // we do a modification so this is needed
     public void save(Student student) {
         entityManager.persist(student);
     }
 
-    @Override
+    @Override// no modification, read only so Transactional is not needed
     public Student findById(int id) {
         return entityManager.find(Student.class, id);// returns null if nothing is found
     }
@@ -43,5 +43,23 @@ public class StudentDAOImpl implements StudentDAO{
         typedQuery.setParameter("theData", lastName);
 
         return typedQuery.getResultList();
+    }
+
+    @Override
+    @Transactional
+    public void update(Student student) {
+        entityManager.merge(student);
+    }
+
+    @Override
+    @Transactional
+    public void delete(Integer id) {
+        entityManager.remove(entityManager.find(Student.class, id));
+    }
+
+    @Override
+    @Transactional
+    public int deleteAll() {
+       return entityManager.createQuery("DELETE FROM Student").executeUpdate();
     }
 }

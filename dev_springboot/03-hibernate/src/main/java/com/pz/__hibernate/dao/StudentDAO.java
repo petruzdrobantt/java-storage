@@ -12,4 +12,11 @@ public interface StudentDAO {
     List<Student> findAll();
 
     List<Student> findByLastName(String lastName);
+
+    void update(Student student);
+
+    void delete(Integer id);
+    // we use integer so we can allow NULL values, which int cant
+
+    int deleteAll();
 }
